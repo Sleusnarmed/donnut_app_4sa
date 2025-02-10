@@ -1,3 +1,4 @@
+import 'package:donnut_app_4sa/pages/home_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -9,6 +10,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp();
+    return MaterialApp(
+      title: 'Donnut App',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+      ),
+      home: HomePage(),
+    );
   }
 }
