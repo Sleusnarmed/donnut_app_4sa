@@ -41,7 +41,38 @@ class DonutTile extends StatelessWidget {
                   ),
                 ),
               )
-            ])
+            ],
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 0),
+              child: Image.asset(imageName),
+            ),
+            Text(donutFlavor,
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+            Text("Donas",
+                style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                    color: donutColor[800])),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                IconButton(
+                  onPressed: () {},
+                  icon: Icon(Icons.favorite_border_outlined,
+                      color: donutColor[800]),
+                ),
+                TextButton(
+                    onPressed: () {},
+                    child: Text(
+                      "Add",
+                      style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                          color: donutColor[800]),
+                    ))
+              ],           
+            ) // This was the missing closing parenthesis
           ])),
     );
   }

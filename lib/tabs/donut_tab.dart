@@ -20,6 +20,7 @@ class DonutTab extends StatelessWidget {
       // organizador
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
+        childAspectRatio: 1/1.5,
       ),
       itemCount: 4,
       padding: const EdgeInsets.all(12),
