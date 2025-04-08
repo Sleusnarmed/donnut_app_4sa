@@ -1,11 +1,13 @@
 import 'package:donnut_app_4sa/utils/donut_tile.dart';
+import 'package:donnut_app_4sa/utils/cart_service.dart';
 import 'package:flutter/material.dart';
 
 class DonutTab extends StatelessWidget {
-  // list of donuts
+  final CartService cartService;
 
+  // list of donuts
   final List donutsOnSale = [
-    // [ donutFlavor, donutPrice, donutColor, imageName ]
+    // [ donutFlavor, donutPrice, donutColor, imageName, donutStore ]
     [
       "Ice Cream",
       "36",
@@ -35,20 +37,18 @@ class DonutTab extends StatelessWidget {
       "Sheeesh Donuts"
     ],
   ];
-  DonutTab({super.key});
+
+  DonutTab({super.key, required this.cartService});
 
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-      // El que roba cosas en la prepa 1 (ESO ENTENDÍ)
-      // organizador
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        childAspectRatio: 1/1.5,
+        childAspectRatio: 1 / 1.5,
       ),
-      itemCount: 4,
+      itemCount: donutsOnSale.length,
       padding: const EdgeInsets.all(12),
-      // Elemento construido
       itemBuilder: (BuildContext context, int index) {
         return DonutTile(
           donutFlavor: donutsOnSale[index][0],
@@ -56,6 +56,14 @@ class DonutTab extends StatelessWidget {
           donutColor: donutsOnSale[index][2],
           imageName: donutsOnSale[index][3],
           donutStore: donutsOnSale[index][4],
+          onAddToCart: () {
+            cartService.addItem(
+              donutsOnSale[index][0], // flavor
+              donutsOnSale[index][1], // price
+              donutsOnSale[index][4], // store
+              donutsOnSale[index][3], // image
+            );
+          },
         );
       },
     );
