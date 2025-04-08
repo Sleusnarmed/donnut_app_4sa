@@ -75,33 +75,53 @@ class _HomePageState extends State<HomePage> {
             ),
 
             // Shopping Cart (simplified without navigation)
-            ShoppingCart(
-              itemCount: _cartService.itemCount,
-              totalPrice: _cartService.totalPrice,
-              onViewCart: () {
-                // Show a simple dialog instead of navigating to a new page
-                showDialog(
-                  context: context,
-                  builder: (context) => AlertDialog(
-                    title: const Text('Your Cart'),
-                    content: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text('${_cartService.itemCount} items in cart'),
-                        Text(
-                            'Total: \$${_cartService.totalPrice.toStringAsFixed(2)}'),
-                      ],
-                    ),
-                    actions: [
-                      TextButton(
-                        onPressed: () => Navigator.pop(context),
-                        child: const Text('OK'),
-                      ),
-                    ],
-                  ),
-                );
-              },
-            ),
+            ListenableBuilder(
+                listenable: _cartService,
+                builder: (context, child) {
+                  return ShoppingCart(
+                    itemCount: _cartService.itemCount,
+                    totalPrice: _cartService.totalPrice,
+                    onViewCart: () {
+                      // Show a simple dialog instead of navigating to a new page
+                      showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          title: const Text('Your Cart'),
+                          content: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text('${_cartService.itemCount} items in cart'),
+                              Text(
+                                  'Total: \$${_cartService.totalPrice.toStringAsFixed(2)}'),
+                              // You can also list the items here if you want
+                              ..._cartService.items.map((item) => ListTile(
+                                    leading:
+                                        Image.asset(item['image'], width: 40),
+                                    title: Text(item['flavor']),
+                                    subtitle: Text(item['store']),
+                                    trailing: Text(
+                                        '\$${item['price'].toStringAsFixed(2)}'),
+                                  )),
+                            ],
+                          ),
+                          actions: [
+                            TextButton(
+                              onPressed: () => Navigator.pop(context),
+                              child: const Text('OK'),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                _cartService.clearCart();
+                                Navigator.pop(context);
+                              },
+                              child: const Text('Clear Cart'),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  );
+                }),
           ],
         ),
       ),

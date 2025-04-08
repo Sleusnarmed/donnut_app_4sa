@@ -1,22 +1,30 @@
 import 'package:flutter/foundation.dart';
 
 class CartService with ChangeNotifier {
-  final List<Map<String, dynamic>> _items = [];
+  int _itemCount = 0;
   double _totalPrice = 0.0;
+  final List<Map<String, dynamic>> _items = [];
 
-  List<Map<String, dynamic>> get items => _items;
+  int get itemCount => _itemCount;
   double get totalPrice => _totalPrice;
+  List<Map<String, dynamic>> get items => _items;
 
-  void addItem(String name, String price, String store, String imageName) {
+  void addItem(String flavor, String price, String store, String image) {
     _items.add({
-      'name': name,
-      'price': price,
+      'flavor': flavor,
+      'price': double.parse(price),
       'store': store,
-      'image': imageName,
+      'image': image,
     });
-    _totalPrice += double.parse(price);
-    notifyListeners(); // This triggers UI updates
+    _itemCount = _items.length;
+    _totalPrice = _items.fold(0, (sum, item) => sum + item['price']);
+    notifyListeners(); // This notifies all listeners that the cart has changed
   }
 
-  int get itemCount => _items.length;
+  void clearCart() {
+    _items.clear();
+    _itemCount = 0;
+    _totalPrice = 0.0;
+    notifyListeners();
+  }
 }
