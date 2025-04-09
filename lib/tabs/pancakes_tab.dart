@@ -1,61 +1,68 @@
-import 'package:donnut_app_4sa/utils/donut_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:donnut_app_4sa/utils/cart_service.dart';
+import 'package:donnut_app_4sa/utils/pancakes_tile.dart';
 
 class PancakesTab extends StatelessWidget {
-  // list of donuts
+  final CartService cartService;
 
-  final List donutsOnSale = [
-    // [ donutFlavor, donutPrice, donutColor, imageName ]
+  final List pancakesOnSale = [
+    // [ flavor, price, color, image, store ]
     [
-      "Ice Cream",
-      "36",
-      Colors.blue,
-      "lib/images/icecream_donut.png",
-      "Dunkin Donuts"
+      "Classic Maple",
+      "39",
+      Colors.amber,
+      "lib/images/pancakes/full_meal_pancakes.png",
+      "Pancake House"
     ],
     [
-      "Strawberry",
-      "45",
+      "Berry Bliss",
+      "47",
+      Colors.pink,
+      "lib/images/pancakes/WHAT.png",
+      "Sweet Stack"
+    ],
+    [
+      "Blueberry Bomb",
+      "79",
+      Colors.indigo,
+      "lib/images/pancakes/pancakes.png",
+      "Stacks on Stacks"
+    ],
+    [
+      "Choco Chip",
+      "90",
       Colors.red,
-      "lib/images/strawberry_donut.png",
-      "Krispy Kreme"
-    ],
-    [
-      "Grape Ape",
-      "84",
-      Colors.purple,
-      "lib/images/grape_donut.png",
-      "Relleno Donuts"
-    ],
-    [
-      "Choco",
-      "95",
-      Colors.brown,
-      "lib/images/chocolate_donut.png",
-      "Sheeesh Donuts"
+      "lib/images/pancakes/strawberry_pancakes.png",
+      "Pancake Palace"
     ],
   ];
-  PancakesTab({super.key});
+
+  PancakesTab({super.key, required this.cartService});
 
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-      // El que roba cosas en la prepa 1 (ESO ENTENDÍ)
-      // organizador
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         childAspectRatio: 1 / 1.5,
       ),
-      itemCount: 4,
+      itemCount: pancakesOnSale.length,
       padding: const EdgeInsets.all(12),
-      // Elemento construido
       itemBuilder: (BuildContext context, int index) {
-        return DonutTile(
-          donutFlavor: donutsOnSale[index][0],
-          donutPrice: donutsOnSale[index][1],
-          donutColor: donutsOnSale[index][2],
-          imageName: donutsOnSale[index][3],
-          donutStore: donutsOnSale[index][4],
+        return PancakeTile(
+          pancakeFlavor: pancakesOnSale[index][0],
+          pancakePrice: pancakesOnSale[index][1],
+          pancakeColor: pancakesOnSale[index][2],
+          imageName: pancakesOnSale[index][3],
+          pancakeStore: pancakesOnSale[index][4],
+          onAddToCart: () {
+            cartService.addItem(
+              pancakesOnSale[index][0], // flavor
+              pancakesOnSale[index][1], // price
+              pancakesOnSale[index][4], // store
+              pancakesOnSale[index][3], // image
+            );
+          },
         );
       },
     );

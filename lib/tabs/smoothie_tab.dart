@@ -1,61 +1,69 @@
-import 'package:donnut_app_4sa/utils/donut_tile.dart';
+import 'package:donnut_app_4sa/utils/smoothie_tile.dart';
+import 'package:donnut_app_4sa/utils/cart_service.dart';
 import 'package:flutter/material.dart';
 
 class SmoothieTab extends StatelessWidget {
-  // list of donuts
+  final CartService cartService;
 
-  final List donutsOnSale = [
-    // [ donutFlavor, donutPrice, donutColor, imageName ]
+  // list of smoothies
+  final List smoothiesOnSale = [
+    // [ smoothieFlavor, smoothiePrice, smoothieColor, imageName, smoothieStore ]
     [
-      "Ice Cream",
+      "Strawberry Banana",
       "36",
-      Colors.blue,
-      "lib/images/icecream_donut.png",
-      "Dunkin Donuts"
+      Colors.redAccent,
+      "lib/images/smoothies/smoothie_share.png",
+      "Jamba Juice"
     ],
     [
-      "Strawberry",
+      "Mango Tango",
       "45",
-      Colors.red,
-      "lib/images/strawberry_donut.png",
-      "Krispy Kreme"
+      Colors.orange,
+      "lib/images/smoothies/tapioca_smoothie.png",
+      "Smoothie King"
     ],
     [
-      "Grape Ape",
+      "Blueberry Blast",
       "84",
-      Colors.purple,
-      "lib/images/grape_donut.png",
-      "Relleno Donuts"
+      Colors.blue,
+      "lib/images/smoothies/this_is_not_a_smoothie.png",
+      "Tropical Smoothie"
     ],
     [
-      "Choco",
+      "Green Detox",
       "95",
-      Colors.brown,
-      "lib/images/chocolate_donut.png",
-      "Sheeesh Donuts"
+      Colors.pink,
+      "lib/images/smoothies/strawberry_smoothie.png",
+      "Nékter"
     ],
   ];
-  SmoothieTab({super.key});
+
+  SmoothieTab({super.key, required this.cartService});
 
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-      // El que roba cosas en la prepa 1 (ESO ENTENDÍ)
-      // organizador
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         childAspectRatio: 1 / 1.5,
       ),
-      itemCount: 4,
+      itemCount: smoothiesOnSale.length,
       padding: const EdgeInsets.all(12),
-      // Elemento construido
       itemBuilder: (BuildContext context, int index) {
-        return DonutTile(
-          donutFlavor: donutsOnSale[index][0],
-          donutPrice: donutsOnSale[index][1],
-          donutColor: donutsOnSale[index][2],
-          imageName: donutsOnSale[index][3],
-          donutStore: donutsOnSale[index][4],
+        return SmoothieTile(
+          smoothieFlavor: smoothiesOnSale[index][0],
+          smoothiePrice: smoothiesOnSale[index][1],
+          smoothieColor: smoothiesOnSale[index][2],
+          imageName: smoothiesOnSale[index][3],
+          smoothieStore: smoothiesOnSale[index][4],
+          onAddToCart: () {
+            cartService.addItem(
+              smoothiesOnSale[index][0], // flavor
+              smoothiesOnSale[index][1], // price
+              smoothiesOnSale[index][4], // store
+              smoothiesOnSale[index][3], // image
+            );
+          },
         );
       },
     );

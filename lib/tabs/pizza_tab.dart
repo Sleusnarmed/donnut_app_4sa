@@ -1,61 +1,69 @@
-import 'package:donnut_app_4sa/utils/donut_tile.dart';
+import 'package:donnut_app_4sa/utils/pizza_tile.dart';
+import 'package:donnut_app_4sa/utils/cart_service.dart';
 import 'package:flutter/material.dart';
 
 class PizzaTab extends StatelessWidget {
-  // list of donuts
+  final CartService cartService;
 
-  final List donutsOnSale = [
-    // [ donutFlavor, donutPrice, donutColor, imageName ]
+  // list of pizzas
+  final List pizzasOnSale = [
+    // [ pizzaFlavor, pizzaPrice, pizzaColor, imageName, pizzaStore ]
     [
-      "Ice Cream",
-      "36",
-      Colors.blue,
-      "lib/images/icecream_donut.png",
-      "Dunkin Donuts"
+      "Pepperoni",
+      "80",
+      Colors.orange,
+      "lib/images/pizza/crazy_pizza.png",
+      "Pizza Hut"
     ],
     [
-      "Strawberry",
-      "45",
-      Colors.red,
-      "lib/images/strawberry_donut.png",
-      "Krispy Kreme"
+      "Margarita",
+      "70",
+      Colors.green,
+      "lib/images/pizza/pizza_animada.png",
+      "Domino's"
     ],
     [
-      "Grape Ape",
-      "84",
-      Colors.purple,
-      "lib/images/grape_donut.png",
-      "Relleno Donuts"
-    ],
-    [
-      "Choco",
+      "BBQ Chicken",
       "95",
       Colors.brown,
-      "lib/images/chocolate_donut.png",
-      "Sheeesh Donuts"
+      "lib/images/pizza/pizza.png",
+      "Little Caesars"
+    ],
+    [
+      "Hawaiian",
+      "85",
+      Colors.yellow,
+      "lib/images/pizza/no_buy.png",
+      "Papa John's"
     ],
   ];
-  PizzaTab({super.key});
+
+  PizzaTab({super.key, required this.cartService});
 
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-      // El que roba cosas en la prepa 1 (ESO ENTENDÍ)
-      // organizador
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         childAspectRatio: 1 / 1.5,
       ),
-      itemCount: 4,
+      itemCount: pizzasOnSale.length,
       padding: const EdgeInsets.all(12),
-      // Elemento construido
       itemBuilder: (BuildContext context, int index) {
-        return DonutTile(
-          donutFlavor: donutsOnSale[index][0],
-          donutPrice: donutsOnSale[index][1],
-          donutColor: donutsOnSale[index][2],
-          imageName: donutsOnSale[index][3],
-          donutStore: donutsOnSale[index][4],
+        return PizzaTile(
+          pizzaFlavor: pizzasOnSale[index][0],
+          pizzaPrice: pizzasOnSale[index][1],
+          pizzaColor: pizzasOnSale[index][2],
+          imageName: pizzasOnSale[index][3],
+          pizzaStore: pizzasOnSale[index][4],
+          onAddToCart: () {
+            cartService.addItem(
+              pizzasOnSale[index][0], // flavor
+              pizzasOnSale[index][1], // price
+              pizzasOnSale[index][4], // store
+              pizzasOnSale[index][3], // image
+            );
+          },
         );
       },
     );

@@ -1,61 +1,69 @@
-import 'package:donnut_app_4sa/utils/donut_tile.dart';
+import 'package:donnut_app_4sa/utils/burger_tile.dart';
+import 'package:donnut_app_4sa/utils/cart_service.dart';
 import 'package:flutter/material.dart';
 
 class BurgerTab extends StatelessWidget {
-  // list of donuts
+  final CartService cartService;
 
-  final List donutsOnSale = [
-    // [ donutFlavor, donutPrice, donutColor, imageName ]
+  // list of burgers
+  final List burgersOnSale = [
+    // [ burgerFlavor, burgerPrice, burgerColor, imageName, burgerStore ]
     [
-      "Ice Cream",
+      "Cangreburger",
       "36",
-      Colors.blue,
-      "lib/images/icecream_donut.png",
-      "Dunkin Donuts"
+      Colors.orange,
+      "lib/images/burgers/cangreburger.png",
+      "Burger King"
     ],
     [
-      "Strawberry",
+      "Mini Burgers",
       "45",
       Colors.red,
-      "lib/images/strawberry_donut.png",
-      "Krispy Kreme"
+      "lib/images/burgers/mini_burger.png",
+      "McDonald's"
     ],
     [
-      "Grape Ape",
+      "Veggie Burger",
       "84",
-      Colors.purple,
-      "lib/images/grape_donut.png",
-      "Relleno Donuts"
+      Colors.green,
+      "lib/images/burgers/burger_and_fries.png",
+      "Wendy's"
     ],
     [
-      "Choco",
+      "House's Favorite Burger",
       "95",
-      Colors.brown,
-      "lib/images/chocolate_donut.png",
-      "Sheeesh Donuts"
+      Colors.yellow,
+      "lib/images/burgers/burger.png",
+      "Five Guys"
     ],
   ];
-  BurgerTab({super.key});
+
+  BurgerTab({super.key, required this.cartService});
 
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-      // El que roba cosas en la prepa 1 (ESO ENTENDÍ)
-      // organizador
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         childAspectRatio: 1 / 1.5,
       ),
-      itemCount: 4,
+      itemCount: burgersOnSale.length,
       padding: const EdgeInsets.all(12),
-      // Elemento construido
       itemBuilder: (BuildContext context, int index) {
-        return DonutTile(
-          donutFlavor: donutsOnSale[index][0],
-          donutPrice: donutsOnSale[index][1],
-          donutColor: donutsOnSale[index][2],
-          imageName: donutsOnSale[index][3],
-          donutStore: donutsOnSale[index][4],
+        return BurgerTile(
+          burgerFlavor: burgersOnSale[index][0],
+          burgerPrice: burgersOnSale[index][1],
+          burgerColor: burgersOnSale[index][2],
+          imageName: burgersOnSale[index][3],
+          burgerStore: burgersOnSale[index][4],
+          onAddToCart: () {
+            cartService.addItem(
+              burgersOnSale[index][0], // flavor
+              burgersOnSale[index][1], // price
+              burgersOnSale[index][4], // store
+              burgersOnSale[index][3], // image
+            );
+          },
         );
       },
     );
