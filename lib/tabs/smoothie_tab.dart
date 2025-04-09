@@ -36,6 +36,34 @@ class SmoothieTab extends StatelessWidget {
       "lib/images/smoothies/strawberry_smoothie.png",
       "Nékter"
     ],
+    [
+      "Strawberry Banana",
+      "36",
+      Colors.redAccent,
+      "lib/images/smoothies/smoothie_share.png",
+      "Jamba Juice"
+    ],
+    [
+      "Mango Tango",
+      "45",
+      Colors.orange,
+      "lib/images/smoothies/tapioca_smoothie.png",
+      "Smoothie King"
+    ],
+    [
+      "Blueberry Blast",
+      "84",
+      Colors.blue,
+      "lib/images/smoothies/this_is_not_a_smoothie.png",
+      "Tropical Smoothie"
+    ],
+    [
+      "Green Detox",
+      "95",
+      Colors.pink,
+      "lib/images/smoothies/strawberry_smoothie.png",
+      "Nékter"
+    ],
   ];
 
   SmoothieTab({super.key, required this.cartService});

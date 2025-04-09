@@ -36,6 +36,34 @@ class PizzaTab extends StatelessWidget {
       "lib/images/pizza/no_buy.png",
       "Papa John's"
     ],
+     [
+      "Pepperoni",
+      "80",
+      Colors.orange,
+      "lib/images/pizza/crazy_pizza.png",
+      "Pizza Hut"
+    ],
+    [
+      "Margarita",
+      "70",
+      Colors.green,
+      "lib/images/pizza/pizza_animada.png",
+      "Domino's"
+    ],
+    [
+      "BBQ Chicken",
+      "95",
+      Colors.brown,
+      "lib/images/pizza/pizza.png",
+      "Little Caesars"
+    ],
+    [
+      "Hawaiian",
+      "85",
+      Colors.yellow,
+      "lib/images/pizza/no_buy.png",
+      "Papa John's"
+    ],
   ];
 
   PizzaTab({super.key, required this.cartService});

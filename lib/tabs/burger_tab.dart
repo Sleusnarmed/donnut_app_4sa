@@ -36,6 +36,34 @@ class BurgerTab extends StatelessWidget {
       "lib/images/burgers/burger.png",
       "Five Guys"
     ],
+    [
+      "Cangreburger",
+      "36",
+      Colors.orange,
+      "lib/images/burgers/cangreburger.png",
+      "Burger King"
+    ],
+    [
+      "Mini Burgers",
+      "45",
+      Colors.red,
+      "lib/images/burgers/mini_burger.png",
+      "McDonald's"
+    ],
+    [
+      "Veggie Burger",
+      "84",
+      Colors.green,
+      "lib/images/burgers/burger_and_fries.png",
+      "Wendy's"
+    ],
+    [
+      "House's Favorite Burger",
+      "95",
+      Colors.yellow,
+      "lib/images/burgers/burger.png",
+      "Five Guys"
+    ],
   ];
 
   BurgerTab({super.key, required this.cartService});

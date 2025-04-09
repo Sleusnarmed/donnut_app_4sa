@@ -35,6 +35,34 @@ class PancakesTab extends StatelessWidget {
       "lib/images/pancakes/strawberry_pancakes.png",
       "Pancake Palace"
     ],
+    [
+      "Classic Maple",
+      "39",
+      Colors.amber,
+      "lib/images/pancakes/full_meal_pancakes.png",
+      "Pancake House"
+    ],
+    [
+      "Berry Bliss",
+      "47",
+      Colors.pink,
+      "lib/images/pancakes/WHAT.png",
+      "Sweet Stack"
+    ],
+    [
+      "Blueberry Bomb",
+      "79",
+      Colors.indigo,
+      "lib/images/pancakes/pancakes.png",
+      "Stacks on Stacks"
+    ],
+    [
+      "Choco Chip",
+      "90",
+      Colors.red,
+      "lib/images/pancakes/strawberry_pancakes.png",
+      "Pancake Palace"
+    ],
   ];
 
   PancakesTab({super.key, required this.cartService});
